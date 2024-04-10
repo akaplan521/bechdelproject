@@ -2,28 +2,57 @@
 title: "bechdel-proj"
 output: html_document
 date: "2024-03-07"
+authors: "Alexa Kaplan, Alec Beland, Catherine Crowell, Carolyn Kelly"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, 
+                      fig.align = "center",
+                      message = F,
+                      warning = F)
+
+#load packages we will need
+install.packages("dplyr")
+pacman::p_load(tidyverse)
+
+#we can also change default themes here if necessary
+
 ```
 
-## R Markdown
+I. Introduction: At the beginning of your paper, you must describe the data, in a paragraph. Note the following:
+ What is the source of the data? Where and when was it created?
+ If it is a sample, from what population was it drawn, and how was the sample selected?
+ Do you suspect any sampling bias?
+ Was it an experiment or an observational study?
+ How were measurements taken, or questions asked?
+ Do you suspect any bias in the questions or measurements?
+ Why is this data of interest to you, and why should the class find it interesting?
+ What kind of data cleaning was necessary (R code for this must show…)
+(^^Just for reference, will be deleted^^)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Introduction
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+The **Bechdel Test** ...
 
-```{r cars}
-summary(cars)
+
+```{r question 1 - Introduction}
+#data cleaning here described above...
 ```
 
-## Including Plots
+II. Data Visualizations: Write R code to create some relevant descriptive graphs, using techniques that
+we’ve used in class (ggplot, maybe dplyr). About 4 or 5 graphs should be plenty, depending on
+complexity.
+For each graph and numerical summary, write a paragraph or two summarizing what you see, and
+suggesting some implications. For example, describe patterns that you observe in a graph, and
+suggest why they make sense, given what you know about the subject, or if they are unexpected.
+Do you think there is a cause-effect relationship between any variables? Explain your reasoning.  
+(^^Just for reference, will be deleted^^)
 
-You can also embed plots, for example:
+## Data Visualizations
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+
+```{r question 2 - Data Visualizations}
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
