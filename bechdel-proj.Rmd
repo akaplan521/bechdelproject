@@ -17,7 +17,7 @@ pacman::p_load(tidyverse)
 
 #we can also change default themes here if necessary
 
-#read in the data file here
+#read in the data file here!!!
 
 bechdel <- read_csv("bechdel2.csv")
 
