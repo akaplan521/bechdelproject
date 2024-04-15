@@ -24,6 +24,14 @@ bechdel <- read_csv("bechdel2.csv")
 ```
 
 I. Introduction: At the beginning of your paper, you must describe the data, in a paragraph. Note the following:
+
+The data we are working with is the "Movies Bechdel Test" data set from the miscellaneous data sets provided on Brightspace. 
+Sampling bias is unlikely since the films since the sample is large at almost 1,800 films ranging from the years 1970 to 2013. 
+There should be no bias in measurements here since the profits are quantitative, not qualitative, measurements, as well as the Bechdel Test which turns objective criteria into a numeric score. 
+This data is of interest because, while we like to think gender equality and gender roles have drastically improved in the past five decades (range of this data set), we can look at the variable of female representation in film to check social progress. 
+As for data cleaning, data points with missing values were removed so that results would not be skewed. 
+
+
  What is the source of the data? Where and when was it created?
  If it is a sample, from what population was it drawn, and how was the sample selected?
  Do you suspect any sampling bias?
