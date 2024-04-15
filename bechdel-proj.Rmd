@@ -72,11 +72,19 @@ Do you think there is a cause-effect relationship between any variables? Explain
       y = score
     )
   ) +
-  
   geom_line()
+
+bechdHist <-
+  ggplot(
+    data = bechdel_factored,
+    mapping = aes(x = score)
+  ) +
+  geom_histogram() +
+  scale_x_reverse()
 
 # show graphs
 bechdByRating
+bechdHist
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
