@@ -72,7 +72,8 @@ Do you think there is a cause-effect relationship between any variables? Explain
 
 
 ```{r question 2 - Data Visualizations}
- bechdByRating <-
+# line to rating by score 
+bechdByRating <-
   ggplot(
     data = bechdel_factored,
     mapping = aes(
@@ -89,10 +90,32 @@ bechdHist <-
   ) +
   geom_histogram() +
   scale_x_reverse()
+# scatter to show rating by score with lines
+bechdScatter <- ggplot(
+  data = bechdel_factored,
+  mapping = aes(
+    x = averating,
+    y = budget13,
+    color = factor(score)
+  )
+) +
+  geom_point() +
+  
+  geom_smooth(
+    method = loess,
+    formula = y~x,
+    se = F
+  )
+
+# side-by-side bars to show domestic vs international profit
+
+# compare year to bechdel rating
+
 
 # show graphs
 bechdByRating
 bechdHist
+bechdScatter
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
