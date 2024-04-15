@@ -48,6 +48,7 @@ bechdel_factored <- bechdel |>
                            Btest5 == "4 notalk" ~ 4,
                            Btest5 == "5 nowomen" ~ 5)) |> 
   select(-Btest5)
+  
 ```
 
 II. Data Visualizations: Write R code to create some relevant descriptive graphs, using techniques that
@@ -63,7 +64,19 @@ Do you think there is a cause-effect relationship between any variables? Explain
 
 
 ```{r question 2 - Data Visualizations}
+ bechdByRating <-
+  ggplot(
+    data = bechdel_factored,
+    mapping = aes(
+      x = averating,
+      y = score
+    )
+  ) +
+  
+  geom_line()
 
+# show graphs
+bechdByRating
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
