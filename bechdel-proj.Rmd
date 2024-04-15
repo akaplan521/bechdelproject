@@ -41,6 +41,13 @@ The **Bechdel Test** ...
 
 ```{r question 1 - Introduction}
 #data cleaning here described above...
+bechdel_factored <- bechdel |> 
+  mutate(score = case_when(Btest5 == "1 ok" ~ 1,
+                           Btest5 == "2 dubious" ~ 2,
+                           Btest5 == "3 men" ~ 3,
+                           Btest5 == "4 notalk" ~ 4,
+                           Btest5 == "5 nowomen" ~ 5)) |> 
+  select(-Btest5)
 ```
 
 II. Data Visualizations: Write R code to create some relevant descriptive graphs, using techniques that
