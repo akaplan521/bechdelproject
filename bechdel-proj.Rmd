@@ -124,18 +124,18 @@ bech_by_decade <- ggplot(bechdel,
   geom_bar(position = "fill")    +
   # Adding a title, removing the labels for y and fill
   labs(x = "Decade", 
-       y = "Film Count", 
-       fill = NULL, 
+       y = "Percentage of Films", 
+       fill = "Bechdel Score", 
        title = "Bechdel Ratings For Different Decades")    +
   # Changing the tickmarks to percentages and removing the buffer space
   scale_y_continuous(expand = c(0, 0, 0.05, 0), 
                      labels = scales::label_percent())    +
+    scale_fill_manual(values=c('violet', 'purple', '#8c99ff', '#8cdeff', '#3e2359')) +
+
   # Changing the theme to theme_classic()
   theme_classic() +
   # Centering the title
-  theme(plot.title = element_text(hjust = 0.5)
-)
-
+  theme(plot.title = element_text(hjust = 0.5))
 # show graphs
 bech_by_decade
 bechdHist
