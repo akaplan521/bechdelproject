@@ -85,6 +85,9 @@ bechdByRating <-
   ) +
   geom_line()
 
+##############################################################################
+#histogram to show scores by number of films
+
 bechdHist <-
   ggplot(
     data = bechdel_factored,
@@ -92,6 +95,9 @@ bechdHist <-
   ) +
   geom_histogram() +
   scale_x_reverse()
+
+
+###############################################################
 # scatter to show rating by score with lines
 bechdScatter <- ggplot(
   data = bechdel_factored,
@@ -109,17 +115,22 @@ bechdScatter <- ggplot(
     se = F
   )
 
+
+#######################################################################
 # side-by-side bars to show domestic vs international profit
+## code here
 
-# compare year to bechdel rating
+
+#######################################################################
 
 
-bechdel$Decade <- as.factor(bechdel$Decade)
-bechdel$Btest5 <- as.factor(bechdel$Btest5)
+# compare bechdel ratings by decade
+bechdel_factored$Decade <- as.factor(bechdel_factored$Decade)
+bechdel_factored$score <- as.factor(bechdel_factored$score)
 
-bech_by_decade <- ggplot(bechdel,
+bech_by_decade <- ggplot(bechdel_factored,
                          mapping = aes(x = Decade,
-                         fill = Btest5))    +
+                         fill = score))    +
     
   geom_bar(position = "fill")    +
   # Adding a title, removing the labels for y and fill
@@ -130,13 +141,15 @@ bech_by_decade <- ggplot(bechdel,
   # Changing the tickmarks to percentages and removing the buffer space
   scale_y_continuous(expand = c(0, 0, 0.05, 0), 
                      labels = scales::label_percent())    +
-    scale_fill_manual(values=c('violet', 'purple', '#8c99ff', '#8cdeff', '#3e2359')) +
+    scale_fill_manual(values=c('#81ff6e', '#ecff96', '#ffe896', '#faaf7d', '#fa3e3e')) +
 
   # Changing the theme to theme_classic()
   theme_classic() +
   # Centering the title
   theme(plot.title = element_text(hjust = 0.5))
+
 # show graphs
+bechdByRating
 bech_by_decade
 bechdHist
 bechdScatter
