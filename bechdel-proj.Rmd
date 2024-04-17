@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       warning = F)
 
 #load packages we will need
-install.packages("dplyr")
+install.packages("dplyr", repos = "http://cran.us.r-project.org")
 pacman::p_load(tidyverse)
 
 #we can also change default themes here if necessary
@@ -23,10 +23,24 @@ bechdel <- read_csv("bechdel2.csv")
 
 ```
 
-I. Introduction: At the beginning of your paper, you must describe the data, in a paragraph. Note the following:
+#I. Introduction#
 
 
-The Bechdel Test assesses female representation in film. To pass, the film must show two women who talk to each other about something other than men. The data we are working with is the "Movies Bechdel Test" data set from the miscellaneous data sets provided on Brightspace. It contains data on 1,793 films ranging from the years 1970 to 2013, including their Bechdel scores on a scale of 1 to 5. A score of 1 passes the test; a score of 2 is "dubious" as it is unclear whether the dialogue between the two women is sufficient to pass; a film with a 3 includes women who talk to each other exclusively about men; a 4 has women who do not talk to each other; and, finally, a 5 has no female characters. 
+The Bechdel Test assesses female representation in film. To pass, the film must show two women who talk to each other about something other than men. The data we are working with is the "Movies Bechdel Test" data set from the miscellaneous data sets provided on Brightspace. It contains data on 1,793 films ranging from the years 1970 to 2013, including their 
+
+1. **imdbId**: IMDB id number
+2. **year**: Year released
+3. **Decade**: Decade released 
+4. **title.y**: Title of the film
+5. **Btest**: Result of the bechdel test:
+6. **Btest5**: on a scale of 1 to 5: A score of 1 passes the test; a score of 2 is "dubious" as it is unclear whether the dialogue between the two women is sufficient to pass; a film with a 3 includes women who talk to each other exclusively about men; a 4 has women who do not talk to each other; and, finally, a 5 has no female characters.
+7. **budget13**: The film's budget
+8. **domgross13**: Domestic grossing
+9. **intgross13**: International grossing
+10. **domprofit13**: Domestic profit
+11. **intprofit13**: International Profit
+12. **averating**: The average rating of the film
+13. **nrating**: The number of ratings considered in **averating**
 
 Sampling bias is unlikely since the films since the sample is large at almost 1,800 films. There should be no bias in measurements here since the profits are quantitative, not qualitative, measurements, as well as the Bechdel Test which turns objective criteria into a numeric score.
 
@@ -34,19 +48,7 @@ This data is of interest because, while we like to think gender equality and gen
 
 As for data cleaning, data points with missing values were removed so that results would not be skewed. 
 
- What is the source of the data? Where and when was it created?
- If it is a sample, from what population was it drawn, and how was the sample selected?
- Do you suspect any sampling bias?
- Was it an experiment or an observational study?
- How were measurements taken, or questions asked?
- Do you suspect any bias in the questions or measurements?
- Why is this data of interest to you, and why should the class find it interesting?
- What kind of data cleaning was necessary (R code for this must show…)
-(^^Just for reference, will be deleted^^)
-
-## Introduction
-
-The **Bechdel Test** ...
+##Data Cleaning##
 
 
 ```{r question 1 - Introduction}
@@ -93,8 +95,13 @@ bechdHist <-
     data = bechdel_factored,
     mapping = aes(x = score)
   ) +
-  geom_histogram() +
-  scale_x_reverse()
+  geom_bar() +
+  labs(x = "Bechdel Score", 
+       y = "Number of Films", 
+       fill = NULL, 
+       title = "Number of films by their bechdel rating")  +
+  theme(plot.title = element_text(hjust = 0.5))
+
 
 
 ###############################################################
@@ -146,7 +153,7 @@ bech_by_decade <- ggplot(bechdel_factored,
   # Changing the theme to theme_classic()
   theme_classic() +
   # Centering the title
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.8))
 
 # show graphs
 bechdByRating
@@ -154,5 +161,3 @@ bech_by_decade
 bechdHist
 bechdScatter
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
