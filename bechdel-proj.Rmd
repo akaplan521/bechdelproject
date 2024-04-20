@@ -1,5 +1,5 @@
 ---
-title: "bechdel-proj"
+title: "Bechdel Project Draft"
 output: html_document
 date: "2024-03-07"
 authors: "Alexa Kaplan, Alec Beland, Catherine Crowell, Carolyn Kelly"
@@ -23,7 +23,7 @@ bechdel <- read_csv("bechdel2.csv")
 
 ```
 
-#I. Introduction#
+## I. Introduction
 
 
 The Bechdel Test assesses female representation in film. To pass, the film must show two women who talk to each other about something other than men. The data we are working with is the "Movies Bechdel Test" data set from the miscellaneous data sets provided on Brightspace. It contains data on 1,793 films ranging from the years 1970 to 2013, including their 
@@ -48,7 +48,7 @@ This data is of interest because, while we like to think gender equality and gen
 
 As for data cleaning, data points with missing values were removed so that results would not be skewed. 
 
-##Data Cleaning##
+## Data Cleaning
 
 
 ```{r question 1 - Introduction}
@@ -63,16 +63,7 @@ bechdel_factored <- bechdel |>
   
 ```
 
-II. Data Visualizations: Write R code to create some relevant descriptive graphs, using techniques that
-we’ve used in class (ggplot, maybe dplyr). About 4 or 5 graphs should be plenty, depending on
-complexity.
-For each graph and numerical summary, write a paragraph or two summarizing what you see, and
-suggesting some implications. For example, describe patterns that you observe in a graph, and
-suggest why they make sense, given what you know about the subject, or if they are unexpected.
-Do you think there is a cause-effect relationship between any variables? Explain your reasoning.  
-(^^Just for reference, will be deleted^^)
-
-## Data Visualizations
+## II. Data Visualizations:
 
 
 ```{r question 2 - Data Visualizations}
