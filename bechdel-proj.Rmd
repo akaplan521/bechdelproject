@@ -85,7 +85,8 @@ bechdByRating <-
       y = score
     )
   ) +
-  geom_line()
+  geom_line() +
+  theme_classic()
 
 # In this first data visualization, the average rating out of five of a given film is on the x-axis and the Bechdel score it received is on the y-axis. The highest concentrations of films have a rating of between 3 and 4 and a bechdel score of either 1 or 4. 
 
@@ -97,12 +98,13 @@ bechdHist <-
     data = bechdel_factored,
     mapping = aes(x = score)
   ) +
-  geom_bar() +
+  geom_bar(fill = "steelblue") +
   labs(x = "Bechdel Score", 
        y = "Number of Films", 
        fill = NULL, 
-       title = "Number of films by their bechdel rating")  +
-  theme(plot.title = element_text(hjust = 0.5))
+       title = "Number of Films by Bechdel Rating")  +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme_classic()
 
 # This bar chart shows the total count of films with each unique Bechdel test score in our data set. The highest proportion of movies have a score of one, passing the Bechdel test, with the next highest score being a 4, indicating that females are in the movie but do not speak. If added up, the count of Bechdel scores between 2-5 (do not pass) still outnumber the quantity of films that do pass the test. 
 
@@ -122,7 +124,16 @@ bechdScatter <- ggplot(
     method = loess,
     formula = y~x,
     se = F
-  )
+  ) +
+  
+  labs(
+    x = "Average Rating",
+    y = "Budget",
+    title = "Correlation of Budget with Average Rating",
+    color = "Score"
+  ) +
+  
+  theme_classic()
 
 # Each point on this scatterplot is positioned by its average rating on the x-axis and the budget of the film on the y-axis. The color of each point, indicated in the key, represents a different Bechdel score rating, with a trend line for each to show the pattern of how its rating and budget relate. 
 #######################################################################
@@ -159,10 +170,11 @@ bech_by_decade <- ggplot(bechdel_factored,
 
 # show graphs
 bechdByRating
-bech_by_decade
 bechdHist
 bechdScatter
+bech_by_decade
 
 # This stacked bar chart segments the films in our data by decade on the x-axis and the the data within each bar shows the percentage of films in our data set that accounted for each score 1-5 of the Bechdel test. Passing scores appear to increase as the dacades pass which is a positive sign, although it is consistent that the majority of films throughtout each of the five decades do not pass this simple test. 
 
 ```
+
