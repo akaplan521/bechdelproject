@@ -73,11 +73,25 @@ bechdByRating <-
     data = bechdel_factored,
     mapping = aes(
       x = averating,
-      y = factor(score)
+      y = fct_rev(factor(score)),
+      fill = factor(score)
     )
   ) +
+  
   geom_boxplot() +
-  theme_classic()
+  
+  scale_fill_manual(values=c('#81ff6e', '#ecff96', '#ffe896', '#faaf7d', '#fa3e3e')) +
+  
+  theme_classic() +
+  
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.4)) +
+  
+  labs(
+    x = "Average Rating (Out of 5 Stars)",
+    y = "Bechdel Score (1 = Pass)",
+    title = "Bechdel Score VS Average Rating"
+  ) 
 
 # show graph
 bechdByRating
@@ -94,7 +108,7 @@ bechdHist <-
     data = bechdel_factored,
     mapping = aes(x = score)
   ) +
-  geom_bar(fill = "steelblue") +
+  geom_bar(fill = "plum") +
   labs(x = "Bechdel Score", 
        y = "Number of Films", 
        fill = NULL, 
