@@ -76,7 +76,7 @@ bechdByRating <-
       y = score
     )
   ) +
-  geom_line() +
+  geom_boxplot() +
   theme_classic()
 
 # show graph
