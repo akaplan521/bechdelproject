@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 #load packages we will need
 install.packages("dplyr", repos = "http://cran.us.r-project.org")
-pacman::p_load(tidyverse)
+pacman::p_load(tidyverse, skimr, rpart, class, caret, rpart.plot)
 
 #we can also change default themes here if necessary
 
