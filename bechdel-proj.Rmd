@@ -66,7 +66,7 @@ bechdel_factored <- bechdel |>
 ## II. Data Visualizations:
 
 
-```{r question 2 - Data Visualizations}
+```{r question 2 - Data Visualizations (line)}
 # line to rating by score 
 bechdByRating <-
   ggplot(
@@ -79,11 +79,16 @@ bechdByRating <-
   geom_line() +
   theme_classic()
 
-# In this first data visualization, the average rating out of five of a given film is on the x-axis and the Bechdel score it received is on the y-axis. The highest concentrations of films have a rating of between 3 and 4 and a bechdel score of either 1 or 4. 
+# show graph
+bechdByRating
 
-##############################################################################
+
+```
+
+In this first data visualization, the average rating out of five of a given film is on the x-axis and the Bechdel score it received is on the y-axis. The highest concentrations of films have a rating of between 3 and 4 and a bechdel score of either 1 or 4. 
+
+```{r question 2 - Data Visualizations (histogram)}
 #histogram to show scores by number of films
-
 bechdHist <-
   ggplot(
     data = bechdel_factored,
@@ -97,9 +102,14 @@ bechdHist <-
   theme(plot.title = element_text(hjust = 0.5)) +
   theme_classic()
 
-# This bar chart shows the total count of films with each unique Bechdel test score in our data set. The highest proportion of movies have a score of one, passing the Bechdel test, with the next highest score being a 4, indicating that females are in the movie but do not speak. If added up, the count of Bechdel scores between 2-5 (do not pass) still outnumber the quantity of films that do pass the test. 
+# show graph
+bechdHist
 
-###############################################################
+```
+
+This bar chart shows the total count of films with each unique Bechdel test score in our data set. The highest proportion of movies have a score of one, passing the Bechdel test, with the next highest score being a 4, indicating that females are in the movie but do not speak. If added up, the count of Bechdel scores between 2-5 (do not pass) still outnumber the quantity of films that do pass the test. 
+
+```{r question 2 - Data Visualizations (scatter)}
 # scatter to show rating by score with lines
 bechdScatter <- ggplot(
   data = bechdel_factored,
@@ -126,15 +136,22 @@ bechdScatter <- ggplot(
   
   theme_classic()
 
-# Each point on this scatterplot is positioned by its average rating on the x-axis and the budget of the film on the y-axis. The color of each point, indicated in the key, represents a different Bechdel score rating, with a trend line for each to show the pattern of how its rating and budget relate. 
-#######################################################################
+# show graph
+bechdScatter
+
+```
+
+Each point on this scatterplot is positioned by its average rating on the x-axis and the budget of the film on the y-axis. The color of each point, indicated in the key, represents a different Bechdel score rating, with a trend line for each to show the pattern of how its rating and budget relate. 
+
+```{r question 2 - Data Visualizations (side-by-side bar)}
 # side-by-side bars to show domestic vs international profit
 ## code here
 
-# This graph will compare how films of each of the Bechdel test scores fared in international and domestic profit. This will indicate if there was any difference is international success that could be due to female representation or lack thereof. 
-#######################################################################
+```
 
+This graph will compare how films of each of the Bechdel test scores fared in international and domestic profit. This will indicate if there was any difference is international success that could be due to female representation or lack thereof. 
 
+```{r question 2 - Data Visualizations (stacked bar)}
 # compare bechdel ratings by decade
 bechdel_factored$Decade <- as.factor(bechdel_factored$Decade)
 bechdel_factored$score <- as.factor(bechdel_factored$score)
@@ -159,13 +176,8 @@ bech_by_decade <- ggplot(bechdel_factored,
   # Centering the title
   theme(plot.title = element_text(hjust = 0.8))
 
-# show graphs
-bechdByRating
-bechdHist
-bechdScatter
+# show graph
 bech_by_decade
-
-# This stacked bar chart segments the films in our data by decade on the x-axis and the the data within each bar shows the percentage of films in our data set that accounted for each score 1-5 of the Bechdel test. Passing scores appear to increase as the dacades pass which is a positive sign, although it is consistent that the majority of films throughtout each of the five decades do not pass this simple test. 
-
 ```
 
+This stacked bar chart segments the films in our data by decade on the x-axis and the the data within each bar shows the percentage of films in our data set that accounted for each score 1-5 of the Bechdel test. Passing scores appear to increase as the dacades pass which is a positive sign, although it is consistent that the majority of films throughtout each of the five decades do not pass this simple test. 
