@@ -195,3 +195,80 @@ bech_by_decade
 ```
 
 This stacked bar chart segments the films in our data by decade on the x-axis and the the data within each bar shows the percentage of films in our data set that accounted for each score 1-5 of the Bechdel test. Passing scores appear to increase as the decades pass which is a positive sign, although it is consistent that the majority of films throughout each of the five decades do not pass this simple test. 
+
+## III: Machine Learning Methods
+
+#kNN Classification
+```{r}
+# Set up functions for data modification
+
+# Normalize function:
+normalize <- function(x) {
+  norm_x <- (x - min(x)) / (max(x) - min(x))
+  return(norm_x)
+}
+
+# Standardize function:
+standardize <- function(x) {
+  standard_x <- (x - mean(x))/(sd(x))
+  return(standard_x)
+}
+
+# Modify the data 
+
+# Normalize the data
+bech_norm <-
+  bechdel |> 
+  select(-imdbId, -Decade, -title.y, -Btest5, -domprofit13, -intprofit13) |> 
+  mutate(
+    across(
+      .cols = -Btest,
+      .fns = normalize
+    )
+  )
+
+# Standardizing the data
+bech_stan <-
+  bechdel |>  
+  select(-imdbId, -Decade, -title.y, -Btest5, -domprofit13, -intprofit13) |> 
+  mutate(
+    across(
+      .cols = -Btest,
+      .fns = standardize
+    )
+  )
+
+# Check the data
+
+# Check that normalization worked for 3 variables:
+bech_norm |> 
+  # Changing from wide to long format
+  pivot_longer(
+    cols = -Btest,
+    names_to = "feature"
+  ) |> 
+  # calculating the mean, sd, min, and max for each feature
+  summarize(
+    .by = feature,
+    average = mean(value) |> round(digits = 2),
+    standard_deviation = sd(value) |> round(digits = 2),
+    p0 = min(value) |> round(digits = 2),
+    p100 = max(value) |> round(digits = 2)
+  )
+
+# Check that standardization worked for 3 variables:
+bech_stan |> 
+  # Changing from wide to long format
+  pivot_longer(
+    cols = -Btest,
+    names_to = "feature"
+  ) |> 
+  # calculating the mean, sd, min, and max for each feature
+  summarize(
+    .by = feature,
+    average = mean(value) |> round(digits = 2),
+    standard_deviation = sd(value) |> round(digits = 2),
+    p0 = min(value) |> round(digits = 2),
+    p100 = max(value) |> round(digits = 2)
+  )
+```
