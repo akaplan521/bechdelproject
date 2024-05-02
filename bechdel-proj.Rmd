@@ -73,7 +73,7 @@ bechdByRating <-
     data = bechdel_factored,
     mapping = aes(
       x = averating,
-      y = score
+      y = factor(score)
     )
   ) +
   geom_boxplot() +
