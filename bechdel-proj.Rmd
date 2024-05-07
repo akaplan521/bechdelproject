@@ -102,22 +102,25 @@ bechdByRating
 In this first data visualization, the average rating out of five of a given film is on the x-axis and the Bechdel score it received is on the y-axis. The highest concentrations of films have a rating of between 3 and 4 and a bechdel score of either 1 or 4. 
 
 ```{r question 2 - Data Visualizations (histogram)}
-#histogram to show scores by number of films
-bechdHist <-
-  ggplot(
+#barplot to show scores by number of films
+
+bechdBar <- ggplot(
     data = bechdel_factored,
-    mapping = aes(x = score)
+    mapping = aes(x = fct_rev(score))
   ) +
-  geom_bar(fill = "plum") +
+  geom_bar(aes(fill = score)) +
+  scale_fill_manual(values = c('#81ff6e', '#ecff96', '#ffe896', '#faaf7d', '#fa3e3e')) +
+  scale_y_continuous(expand = c(0, 0, 0.05, 0), 
+                     labels = scales::label_percent()) +
   labs(x = "Bechdel Score", 
        y = "Number of Films", 
        fill = NULL, 
-       title = "Number of Films by Bechdel Rating")  +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  theme_classic()
+       title = "Number of Films by Bechdel Rating") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.4))
 
-# show graph
-bechdHist
+# Show graph
+bechdBar
 
 ```
 
