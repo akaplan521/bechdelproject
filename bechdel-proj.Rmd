@@ -26,7 +26,7 @@ bechdel <- read_csv("bechdel2.csv")
 ## I. Introduction
 
 
-The Bechdel Test assesses the bare minimum of female representation in film. To pass, the film must show two women who talk to each other about something other than men. The data we are working with is the "Movies Bechdel Test" data set from the miscellaneous data sets provided on Brightspace. It contains data on 1,793 films ranging from the years 1970 to 2013, including the following data points:
+The Bechdel Test assesses female representation in film. To pass, the film must show two women who talk to each other about something other than men. The data we are working with is the "Movies Bechdel Test" data set from the miscellaneous data sets provided on Brightspace. It contains data on 1,793 films ranging from the years 1970 to 2013, including their 
 
 1. **imdbId**: IMDB id number
 2. **year**: Year released
@@ -89,7 +89,9 @@ bechdBar <- ggplot(
   theme_classic() +
   
   theme(legend.position = "none",
-        plot.title = element_text(hjust = 0.4))
+        plot.title = element_text(hjust = 0.4),
+        plot.background = element_rect(fill = "lightsteelblue1"),
+        panel.background = element_rect(fill = "lightsteelblue3"))
 
 # Show graph
 bechdBar
@@ -118,7 +120,9 @@ bechdByRating <-
   theme_classic() +
   
   theme(legend.position = "none",
-        plot.title = element_text(hjust = 0.4)) +
+        plot.title = element_text(hjust = 0.4),
+        plot.background = element_rect(fill = "lightsteelblue1"),
+        panel.background = element_rect(fill = "lightsteelblue3")) +
   
   labs(
     x = "Average Rating (Out of 5 Stars)",
@@ -161,7 +165,14 @@ bechdScatter <- ggplot(
     color = "Score"
   ) +
   
-  theme_classic()
+  scale_color_manual(values=c('#81ff6e', '#ecff96', '#ffe896', '#faaf7d', '#fa3e3e')) +
+  
+  theme_classic() +
+  
+  theme(
+    plot.background = element_rect(fill = "lightsteelblue1"),
+    panel.background = element_rect(fill = "lightsteelblue3"),
+    legend.background = element_rect(fill = "lightsteelblue3"))
 
 # show graph
 bechdScatter
@@ -201,7 +212,10 @@ bech_by_decade <- ggplot(bechdel_factored,
   # Changing the theme to theme_classic()
   theme_classic() +
   # Centering the title
-  theme(plot.title = element_text(hjust = 0.8))
+  theme(plot.title = element_text(hjust = 0.8),
+        plot.background = element_rect(fill = "lightsteelblue1"),
+        panel.background = element_rect(fill = "lightsteelblue3"),
+        legend.background = element_rect(fill = "lightsteelblue3"))
 
 # show graph
 bech_by_decade
