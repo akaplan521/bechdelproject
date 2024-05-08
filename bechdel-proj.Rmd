@@ -26,7 +26,7 @@ bechdel <- read_csv("bechdel2.csv")
 ## I. Introduction
 
 
-The Bechdel Test assesses female representation in film. To pass, the film must show two women who talk to each other about something other than men. The data we are working with is the "Movies Bechdel Test" data set from the miscellaneous data sets provided on Brightspace. It contains data on 1,793 films ranging from the years 1970 to 2013, including their 
+The Bechdel Test assesses the bare minimum of female representation in film. To pass, the film must show two women who talk to each other about something other than men. The data we are working with is the "Movies Bechdel Test" data set from the miscellaneous data sets provided on Brightspace. It contains data on 1,793 films ranging from the years 1970 to 2013, including the following data points:
 
 1. **imdbId**: IMDB id number
 2. **year**: Year released
