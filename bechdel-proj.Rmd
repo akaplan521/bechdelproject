@@ -278,3 +278,12 @@ bech_stan |>
     p100 = max(value) |> round(digits = 2)
   )
 ```
+
+
+Conclusions
+
+The average rating of the films in our data set does not appear to be related to whether or not it passes the Bechdel test. According to the box plots which compare a film’s average rating out of five to how much of the Bechdel test it achieved, any difference in median and range score is negligible. The graph visualizing how films of different Bechdel scores’ average ratings compare to their budgets would imply that this relationship is random, so the budget variable is not a reliable predictor of Bechdel score. The decade variable, however, did show some correlation with whether or not a film passed the test, showing an upward trend in the percentage of films passing the Bechdel test with just about each decade that passes. Using machine learning techniques, we attempted to predict whether or not a film passes the test using x as an explanatory variable, we found that x. 
+
+Limitations and Recommendations 
+
+The requirement that each film exist in both the Bechdel website and the website tracking film finances led to selection bias that may have impacted our results. Future endeavors to visualize patterns in films with respect to female representation should consider how to minimize bias when sourcing their data. The project could be improved by using films outside of Hollywood, independent or international productions, for example, which would offer a bigger pool of movie that pass the Bechdel test, increasing the sample so that we might be able to find a more prominent pattern in how successful the film turned out to be and why. 
