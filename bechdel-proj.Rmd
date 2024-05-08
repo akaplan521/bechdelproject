@@ -240,7 +240,7 @@ bech_stacked_bar
 
 ```
 
-This graph will compare how films of each of the Bechdel test scores fared in international and domestic profit. This will indicate if there was any difference is international success that could be due to female representation or lack thereof. 
+This graph compares how films of each of the Bechdel test scores fared in international and domestic profit. This indicates if there was any difference is international success that could be due to female representation or lack thereof. 
 
 ```{r question 2 - Data Visualizations (stacked bar)}
 # compare bechdel ratings by decade
