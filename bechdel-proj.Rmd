@@ -183,7 +183,60 @@ Each point on this scatterplot is positioned by its average rating on the x-axis
 
 ```{r question 2 - Data Visualizations (side-by-side bar)}
 # side-by-side bars to show domestic vs international profit
-## code here
+# data modification
+bechdel_profit_type <- bechdel_factored |> 
+  select(Btest, domgross13, intgross13) |> 
+  na.omit() |> 
+  pivot_longer(
+    cols = c(domgross13:intgross13),
+    names_to = "profitType", 
+    values_to = "value"
+  )
+
+bechdel_profit_type$Btest <- as.factor(bechdel_profit_type$Btest)
+
+# calculate mean
+means <- bechdel_profit_type |> 
+  group_by(Btest, profitType)  |> 
+  summarise(mean_value = mean(value))
+
+
+# graph
+bech_stacked_bar <- ggplot(
+  data = means,
+  mapping = aes(
+    x = profitType,
+    y = mean_value,
+    fill = Btest
+  )
+) +
+  geom_bar(
+    aes(y = mean_value),
+    color = "black",
+    stat = "identity",
+    position = "dodge2"
+  ) +
+  
+  # Remove space under graph
+  scale_y_continuous(
+    expand = c(0, 0, 0.05, 0)
+  ) +
+  
+  # add labels
+  labs(
+    x = "Profit Type",
+    y = "Mean Gross Value (in Thousands)",
+    fill = "Bechdel Test Result",
+    title = "Outcome of Bechdel Test Across Domestic and International Gross"
+    ) +
+  
+  # change colors
+  scale_fill_manual(values=c('#fa3e3e', '#81ff6e')) +
+  
+  # change x-axis 
+  scale_x_discrete(labels = c("domgross13" = "Domestic", "intgross13" = "International"))
+
+bech_stacked_bar
 
 ```
 
