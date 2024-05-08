@@ -66,6 +66,32 @@ bechdel_factored <- bechdel |>
 ## II. Data Visualizations:
 
 
+```{r question 2 - Data Visualizations (barplot)}
+
+#barplot to show scores by number of films
+
+bechdBar <- ggplot(
+    data = bechdel_factored,
+    mapping = aes(x = fct_rev(factor(score)))
+  ) +
+  geom_bar(aes(fill = factor(score))) +
+  scale_fill_manual(values = c('#81ff6e', '#ecff96', '#ffe896', '#faaf7d', '#fa3e3e')) +
+  scale_y_continuous(expand = c(0, 0, 0.05, 0), 
+                     labels = scales::label_percent()) +
+  labs(x = "Bechdel Score", 
+       y = "Number of Films",
+       title = "Number of Films by Bechdel Rating") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.4))
+
+# Show graph
+bechdBar
+
+```
+
+This bar chart shows the total count of films with each unique Bechdel test score in our data set. The highest proportion of movies have a score of one, passing the Bechdel test, with the next highest score being a 4, indicating that females are in the movie but do not speak. If added up, the count of Bechdel scores between 2-5 (do not pass) still outnumber the quantity of films that do pass the test. 
+
+
 ```{r question 2 - Data Visualizations (boxplot)}
 # line to rating by score 
 bechdByRating <-
@@ -99,32 +125,8 @@ bechdByRating
 
 ```
 
-In this first data visualization, the average rating out of five of a given film is on the x-axis and the Bechdel score it received is on the y-axis. The highest concentrations of films have a rating of between 3 and 4 and a bechdel score of either 1 or 4. 
+In this box plot, the average rating out of five of a given film is on the x-axis and the Bechdel score it received is on the y-axis. The highest concentrations of films have a rating of between 3 and 4 and a bechdel score of either 1 or 4. 
 
-```{r question 2 - Data Visualizations (barplot)}
-
-#barplot to show scores by number of films
-
-bechdBar <- ggplot(
-    data = bechdel_factored,
-    mapping = aes(x = fct_rev(factor(score)))
-  ) +
-  geom_bar(aes(fill = factor(score))) +
-  scale_fill_manual(values = c('#81ff6e', '#ecff96', '#ffe896', '#faaf7d', '#fa3e3e')) +
-  scale_y_continuous(expand = c(0, 0, 0.05, 0), 
-                     labels = scales::label_percent()) +
-  labs(x = "Bechdel Score", 
-       y = "Number of Films",
-       title = "Number of Films by Bechdel Rating") +
-  theme_classic() +
-  theme(plot.title = element_text(hjust = 0.4))
-
-# Show graph
-bechdBar
-
-```
-
-This bar chart shows the total count of films with each unique Bechdel test score in our data set. The highest proportion of movies have a score of one, passing the Bechdel test, with the next highest score being a 4, indicating that females are in the movie but do not speak. If added up, the count of Bechdel scores between 2-5 (do not pass) still outnumber the quantity of films that do pass the test. 
 
 ```{r question 2 - Data Visualizations (scatter)}
 # scatter to show rating by score with lines
