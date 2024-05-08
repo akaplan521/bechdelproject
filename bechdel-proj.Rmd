@@ -402,9 +402,65 @@ knn_results
 
 ```
 
-#kNN Classification
+#Graphing results of kNN classification
 
-```{tree}
+```{r graphing results }
+
+# graph
+knn_results |> 
+  pivot_longer(
+    cols =-k,
+    values_to = "acc",
+    names_to = "rescale"
+  ) |> 
+  # forming our line graph
+  ggplot(
+    mapping = aes(
+      x = k,
+      y = acc,
+      color = rescale
+    )
+  ) +
+  
+  # add line
+  geom_line(
+    size = 1
+  ) +
+  
+  # add labels
+  labs(
+    x = "Choice of k",
+    y = "accuracy",
+    color = "Rescale Method"
+  ) +
+  
+  # change y-axis to percentages
+  scale_y_continuous(
+    labels = scales::percent_format()
+  ) +
+  
+  # move legend
+  theme(
+    legend.position = c(0.8, 0.8)
+  ) +
+  
+  # change x-axis to increments of 10
+  scale_x_continuous(
+    breaks = seq(10, 100, by = 10),
+    labels = seq(10, max(100), by = 10)
+  ) +
+  
+  # change legend values
+  scale_color_manual(
+    labels = c("Normalized", "Standardized"),
+    values = c("#F8766D", "#00BFC4")
+  )
+  
+```
+
+###kNN Classification
+
+```{r tree}
 
 full_tree <-
   rpart(
@@ -422,7 +478,8 @@ full_tree <-
 data.frame(full_tree$cptable)
 
 ```
-```{find pruning point}
+#Finding pruning point
+```{r find pruning point}
 # Use the cptable to find the best value of cp to use the prune the full tree
 xcutoff <- 
   full_tree$cptable |> 
