@@ -352,7 +352,107 @@ bech_stan |>
     p100 = max(value) |> round(digits = 2)
   )
 ```
+#Looping through K
+```{r k loop}
+# Keep this at the top
+RNGversion("4.1.0"); set.seed(1234)
 
+# create tibble
+### CHANGE K
+knn_results <-
+  tibble(
+    k = 5:100,
+    norm_acc = rep(-1, length(k)),
+    stan_acc = rep(-1, length(k))
+  )
+
+
+bechdel_k$Btest <- as.factor(bechdel_k$Btest)
+bech_stan$Btest <- as.factor(bech_stan$Btest)
+bech_norm$Btest <- as.factor(bech_norm$Btest)
+
+# for loop to cycle through each different choice in the k column of knn_acc
+for (i in 1:nrow(knn_results)) {
+  # predict for norm data
+  knn_norm <-
+    knn.cv(
+      train = bech_norm[ , -1],
+      cl = bechdel_k$Btest,
+      k = knn_results$k[i],
+    )
+  
+  knn_results$norm_acc[i] <- mean(knn_norm == bechdel_k$Btest)
+  
+  # predict for stan data
+  knn_stan <-
+    knn.cv(
+      train = bech_stan[ , -1],
+      cl = bechdel_k$Btest,
+      k = knn_results$k[i]   
+    )
+  
+  knn_results$stan_acc[i] <- mean(knn_stan == bechdel_k$Btest)
+}
+
+
+# Displaying the first 10 rows
+tibble(knn_results)
+
+knn_results
+
+```
+
+#kNN Classification
+
+```{tree}
+
+full_tree <-
+  rpart(
+    formula = Btest ~ .,
+    data = bechdel_k,
+    method = "class",
+    # we want to use entropy to split the nodes
+    parms = list(split = "information"),
+    # NEXT: three arguments will fully grow the tree
+    minsplit = 2,
+    minbucket = 1,
+    cp = -1
+  )
+
+data.frame(full_tree$cptable)
+
+```
+```{find pruning point}
+# Use the cptable to find the best value of cp to use the prune the full tree
+xcutoff <- 
+  full_tree$cptable |> 
+  data.frame() |> 
+  # pick the row with the lowest xerror (cross-validation error)
+  slice_min(xerror, n = 1) |> 
+  # pick min k
+  slice_min(nsplit, n = 1) |> 
+  # calculate xcutoff as xerror + xstd
+  mutate(
+    xcutoff = xerror + xstd
+  ) |> 
+  # keep just the xcutoff
+  pull(xcutoff)
+
+cp_prune <-
+  full_tree$cptable |> 
+  data.frame() |> 
+  # finding 'all' rows with xerror < xcutoff
+  filter(
+    xerror < xcutoff
+  ) |> 
+  # keeping the simplest tree (first row)
+  slice(1) |> 
+  # extract the cp value
+  pull(CP)
+
+c("xcutoff" = xcutoff,
+  "cp" = cp_prune)
+```
 
 Conclusions
 
