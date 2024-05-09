@@ -458,7 +458,42 @@ knn_results |>
   
 ```
 
+```{r finding best k and method}
+# display best accuracy across methods
+knn_results |> 
+  pivot_longer(
+    cols = -k,
+    names_to = "rescale_method",
+    values_to = "accuracy"
+  ) |> 
+  slice_max(accuracy)
+
+```
+Using the graph as well as code to isolate the maximum accuracy for each value of k with both the standardized and normalized data, we can see that the best choice is to use *k = 38* and *standardized* data.
 ###kNN Classification
+
+```{r confusion matrix}
+# knn for best k value
+bech_knn <- 
+  knn(
+    train = bech_stan |> dplyr::select(-Btest),
+    test = bech_stan[ , -1],
+    cl = bech_stan$Btest,
+    k = 38
+  )
+
+# confusion matrix
+confusionMatrix(
+  data = bech_knn,
+  reference = bechdel_k$Btest
+)
+
+```
+
+By using kNN we imporve the accuracy from 59% (No Info Rate) to 64.62%. The   true accuracy of the model is likely to fall between 0.6179 to 0.6738 (95% CI). The p-value is 0.0001, less than the significance level of 0.05, suggests that the model's accuracy is significantly different from what would be achieved by choosing only FAIL.
+
+
+##Classification Tree
 
 ```{r tree}
 
