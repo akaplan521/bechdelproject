@@ -280,6 +280,11 @@ This stacked bar chart segments the films in our data by decade on the x-axis an
 
 #kNN Classification
 ```{r}
+
+bechdel_k <- bechdel |> 
+  select(-imdbId, -Decade, -title.y, -Btest5, -domprofit13, -intprofit13) |> 
+  na.omit() |>
+  relocate(Btest)
 # Set up functions for data modification
 
 # Normalize function:
@@ -298,8 +303,7 @@ standardize <- function(x) {
 
 # Normalize the data
 bech_norm <-
-  bechdel |> 
-  select(-imdbId, -Decade, -title.y, -Btest5, -domprofit13, -intprofit13) |> 
+  bechdel_k |> 
   mutate(
     across(
       .cols = -Btest,
@@ -309,8 +313,7 @@ bech_norm <-
 
 # Standardizing the data
 bech_stan <-
-  bechdel |>  
-  select(-imdbId, -Decade, -title.y, -Btest5, -domprofit13, -intprofit13) |> 
+  bechdel_k |>  
   mutate(
     across(
       .cols = -Btest,
@@ -366,7 +369,7 @@ knn_results <-
     stan_acc = rep(-1, length(k))
   )
 
-
+#changing response variable to factors in all dataframes
 bechdel_k$Btest <- as.factor(bechdel_k$Btest)
 bech_stan$Btest <- as.factor(bech_stan$Btest)
 bech_norm$Btest <- as.factor(bech_norm$Btest)
@@ -545,11 +548,31 @@ cp_prune <-
 c("xcutoff" = xcutoff,
   "cp" = cp_prune)
 ```
+```{r pruned tree}
+# Prune the tree
+tree_pruned <-
+  prune(
+    tree = full_tree,
+    cp = cp_prune
+  )
 
-Conclusions
+# Then plot it:
+rpart.plot(
+  x = tree_pruned,
+  extra = 104
+)
 
-The average rating of the films in our data set does not appear to be related to whether or not it passes the Bechdel test. According to the box plots which compare a film’s average rating out of five to how much of the Bechdel test it achieved, any difference in median and range score is negligible. The graph visualizing how films of different Bechdel scores’ average ratings compare to their budgets would imply that this relationship is random, so the budget variable is not a reliable predictor of Bechdel score. The decade variable, however, did show some correlation with whether or not a film passed the test, showing an upward trend in the percentage of films passing the Bechdel test with just about each decade that passes. Using machine learning techniques, we attempted to predict whether or not a film passes the test using x as an explanatory variable, we found that x. 
+```
 
-Limitations and Recommendations 
+The resulting pruned tree has only one node. This suggeststhat the model is significantly flawed--not suprising. Imbalanced data is a viable explanation for these issues as well as a lack of nuance and diversity in the explanatory variables and data respectively. 
 
-The requirement that each film exist in both the Bechdel website and the website tracking film finances led to selection bias that may have impacted our results. Future endeavors to visualize patterns in films with respect to female representation should consider how to minimize bias when sourcing their data. The project could be improved by using films outside of Hollywood, independent or international productions, for example, which would offer a bigger pool of movie that pass the Bechdel test, increasing the sample so that we might be able to find a more prominent pattern in how successful the film turned out to be and why. 
+
+
+###Conclusions
+
+The average rating of the films in our data set does not appear to be related to whether or not it passes the Bechdel test. According to the box plots which compare a film’s average rating out of five to how much of the Bechdel test it achieved, any difference in median and range score is negligible. The graph visualizing how films of different Bechdel scores’ average ratings compare to their budgets would imply that this relationship is random, so the budget variable is not a reliable predictor of Bechdel score. The decade variable, however, did show some correlation with whether or not a film passed the test, showing an upward trend in the percentage of films passing the Bechdel test with just about each decade that passes. For this particular data, classification machine learning techniques are best suited for predicting class variables--in this case the result of the Bechdel test(Pass/Fail). Because our data is imbalanced in terms of classes(Pass/Fail), accuracy may not be the best measure of our kNN model because systemically predicting the majority class(Fail) would already yield better results. If we were to consider accuracy however, we would conclude that an accuracy of 64.62% is not overwhelmingly good. This could very well be attributed to the fact that the predictors included in the model may not necessarily correlate strongly with Bechdel test results. The classification tree has no leaves indicating the model is extremely over-simplified and should not be used to generalize new data. 
+
+###Limitations and Recommendations 
+The requirement that each film exist in both the Bechdel website and the website tracking film finances led to selection bias that may have impacted our results. Future endeavors to visualize patterns in films with respect to female representation should consider how to minimize bias when sourcing their data. The project could be improved by using films outside of Hollywood, independent or international productions, for example, which would offer a bigger pool of movie that pass the Bechdel test, increasing the sample so that we might be able to find a more prominent pattern in how successful the film turned out to be and why. A main limitation in our analyses was a narrow range of predictors included in the data. Including a broader range of predictors that better capture the diverse factors influencing Bechdel test results would likely improve results. The machine learning models both of them fail to capture the variability of the data. The data used in these models was unbalanced which skewed the accuracy of the kNN model to appear better than it should be. Utilizing more diverse and representative data which incorporated a broader range of predictors may have seen more accurate classification models. 
+
+
