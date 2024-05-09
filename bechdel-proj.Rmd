@@ -234,7 +234,17 @@ bech_stacked_bar <- ggplot(
   scale_fill_manual(values=c('#fa3e3e', '#81ff6e')) +
   
   # change x-axis 
-  scale_x_discrete(labels = c("domgross13" = "Domestic", "intgross13" = "International"))
+  scale_x_discrete(labels = c("domgross13" = "Domestic", "intgross13" = "International")) +
+  
+  # theme 
+  theme_classic() +
+  
+  # blue background
+  theme(
+    plot.background = element_rect(fill = "lightsteelblue1"),
+        panel.background = element_rect(fill = "lightsteelblue3"),
+        legend.background = element_rect(fill = "lightsteelblue3")
+  )
 
 bech_stacked_bar
 
