@@ -371,7 +371,6 @@ bech_stan |>
 RNGversion("4.1.0"); set.seed(1234)
 
 # create tibble
-### CHANGE K
 knn_results <-
   tibble(
     k = 5:100,
@@ -408,10 +407,8 @@ for (i in 1:nrow(knn_results)) {
 }
 
 
-# Displaying the first 10 rows
+# Displaying table
 tibble(knn_results)
-
-knn_results
 
 ```
 
